@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class WebitDoctrineJsonExtension extends Extension
+final class WebitDoctrineJsonExtension extends Extension
 {
 
     /**
@@ -47,12 +47,14 @@ class WebitDoctrineJsonExtension extends Extension
         $serializer->setFactory(array(new Reference('service_container'), 'get'));
         $serializer->addArgument($jmsJsonConfig['serializer']);
         $serializer->setLazy(true);
+        $serializer->setPublic(true);
         $container->setDefinition('webit_doctrine_json.jms_json.serializer', $serializer);
 
         $typeResolver = new Definition('Webit\\DoctrineJmsJson\\Serializer\\DefaultTypeResolver');
         $typeResolver->setFactory(array(new Reference('service_container'), 'get'));
         $typeResolver->addArgument($jmsJsonConfig['type_resolver']);
         $typeResolver->setLazy(true);
+        $typeResolver->setPublic(true);
         $container->setDefinition('webit_doctrine_json.jms_json.type_resolver', $typeResolver);
     }
 }

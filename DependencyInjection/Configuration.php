@@ -10,17 +10,16 @@ namespace Webit\DoctrineJsonBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
+use Symfony\Component\HttpKernel\Kernel;
 
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * @inheritdoc
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-
-        $root = $builder->root('webit_doctrine_json');
+        list($builder, $root) = $this->createTreeBuilder('webit_doctrine_json');
 
         $root
             ->children()
@@ -45,5 +44,14 @@ class Configuration implements ConfigurationInterface
             ->end();
 
         return $builder;
+    }
+
+    private function createTreeBuilder($rootNodeName)
+    {
+        if (version_compare(Kernel::VERSION, '5.0.0') == -1) {
+            return [$builder = new TreeBuilder(), $builder->root($rootNodeName)];
+        }
+
+        return [$builder = new TreeBuilder($rootNodeName), $builder->getRootNode()];
     }
 }

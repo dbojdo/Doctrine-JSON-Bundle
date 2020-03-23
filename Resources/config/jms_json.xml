@@ -5,6 +5,6 @@
         http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="webit_doctrine_json.jms_json.default_type_resolver" class="Webit\DoctrineJmsJson\Serializer\Type\DefaultSerializerTypeResolver" />
+        <service id="webit_doctrine_json.jms_json.default_type_resolver" class="Webit\DoctrineJmsJson\Serializer\Type\DefaultSerializerTypeResolver" public="true" />
     </services>
 </container>

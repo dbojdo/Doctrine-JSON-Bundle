@@ -33,6 +33,8 @@ class AppKernel extends Kernel
      */
     public function __construct($runId, array $config)
     {
+        parent::__construct('test', true);
+
         $this->runId = $runId;
         $this->runDir = sys_get_temp_dir().'/'. $this->runId;
         @mkdir($this->runDir, 0755);
@@ -89,6 +91,5 @@ class AppKernel extends Kernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->config);
-//        $loader->load(__DIR__.'/Resources/config/config.yml');
     }
 }

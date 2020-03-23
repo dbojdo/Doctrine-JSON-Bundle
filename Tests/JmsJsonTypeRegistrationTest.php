@@ -9,16 +9,17 @@
 namespace Webit\DoctrineJsonBundle\Tests;
 
 use Doctrine\DBAL\Types\Type;
-use JMS\Serializer\SerializerBuilder;
+use PHPUnit\Framework\TestCase;
+use Webit\DoctrineJmsJson\DBAL\JmsJsonType;
 
-class JmsJsonTypeRegistrationTest extends \PHPUnit_Framework_TestCase
+class JmsJsonTypeRegistrationTest extends TestCase
 {
     /**
      * @var string
      */
     private $runId;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->runId = md5(microtime());
     }
@@ -96,9 +97,9 @@ class JmsJsonTypeRegistrationTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Type::hasType($type));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
-        $refClass = new \ReflectionClass('Webit\DoctrineJmsJson\DBAL\JmsJsonType');
+        $refClass = new \ReflectionClass(JmsJsonType::class);
         foreach (array('serializer', 'typeResolver') as $property) {
             $refProperty = $refClass->getProperty($property);
             $refProperty->setAccessible(true);
