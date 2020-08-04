@@ -8,6 +8,7 @@
 
 namespace Webit\DoctrineJsonBundle\DependencyInjection;
 
+use JMS\Serializer\ArrayTransformerInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -43,12 +44,19 @@ final class WebitDoctrineJsonExtension extends Extension
 
         $container->setParameter('webit_doctrine_json.jms_json.type_name', $jmsJsonConfig['type_name']);
 
-        $serializer = new Definition('JMS\\Serializer\\Serializer');
+        $serializer = new Definition('JMS\\Serializer\\SerializerInterface');
         $serializer->setFactory(array(new Reference('service_container'), 'get'));
         $serializer->addArgument($jmsJsonConfig['serializer']);
         $serializer->setLazy(true);
         $serializer->setPublic(true);
         $container->setDefinition('webit_doctrine_json.jms_json.serializer', $serializer);
+
+        $arrayTransformer = new Definition('JMS\\Serializer\\ArrayTransformerInterface');
+        $arrayTransformer->setFactory(array(new Reference('service_container'), 'get'));
+        $arrayTransformer->addArgument($jmsJsonConfig['serializer']);
+        $arrayTransformer->setLazy(true);
+        $arrayTransformer->setPublic(true);
+        $container->setDefinition('webit_doctrine_json.jms_json.array_transformer', $serializer);
 
         $typeResolver = new Definition('Webit\\DoctrineJmsJson\\Serializer\\DefaultTypeResolver');
         $typeResolver->setFactory(array(new Reference('service_container'), 'get'));

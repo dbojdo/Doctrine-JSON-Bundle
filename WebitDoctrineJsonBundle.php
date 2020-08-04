@@ -35,6 +35,7 @@ class WebitDoctrineJsonBundle extends Bundle
             );
             JmsJsonType::initialize(
                 $container->get('webit_doctrine_json.jms_json.serializer'),
+                $container->get('webit_doctrine_json.jms_json.array_transformer'),
                 $container->get('webit_doctrine_json.jms_json.type_resolver')
             );
         } catch (DBALException $e) {
