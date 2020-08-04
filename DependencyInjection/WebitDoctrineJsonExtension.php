@@ -56,7 +56,7 @@ final class WebitDoctrineJsonExtension extends Extension
         $arrayTransformer->addArgument($jmsJsonConfig['serializer']);
         $arrayTransformer->setLazy(true);
         $arrayTransformer->setPublic(true);
-        $container->setDefinition('webit_doctrine_json.jms_json.array_transformer', $serializer);
+        $container->setDefinition('webit_doctrine_json.jms_json.array_transformer', $arrayTransformer);
 
         $typeResolver = new Definition('Webit\\DoctrineJmsJson\\Serializer\\DefaultTypeResolver');
         $typeResolver->setFactory(array(new Reference('service_container'), 'get'));
