@@ -15,10 +15,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Webit\DoctrineJmsJson\DBAL\Exception\JmsJsonTypeInitializationException;
 use Webit\DoctrineJmsJson\DBAL\JmsJsonType;
 
-if(!class_exists(\Doctrine\DBAL\Exception::class)) {
-    class_alias(\Doctrine\DBAL\DBALException::class, DBALException::class);
-}
-
 class WebitDoctrineJsonBundle extends Bundle
 {
     public function boot()
