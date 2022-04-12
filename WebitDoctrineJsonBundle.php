@@ -8,7 +8,7 @@
 
 namespace Webit\DoctrineJsonBundle;
 
-use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Exception as DBALException;
 use Doctrine\DBAL\Types\Type;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -29,6 +29,8 @@ class WebitDoctrineJsonBundle extends Bundle
         }
 
         try {
+            // Type::hasType is not sufficient because it checks for a type name, while addType prevents registering a single type under different names
+            // Because of this, handling the DBALException is much cleaner
             Type::addType(
                 $container->getParameter('webit_doctrine_json.jms_json.type_name'),
                 'Webit\DoctrineJmsJson\DBAL\JmsJsonType'
