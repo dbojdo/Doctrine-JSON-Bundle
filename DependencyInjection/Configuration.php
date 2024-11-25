@@ -17,7 +17,7 @@ final class Configuration implements ConfigurationInterface
     /**
      * @inheritdoc
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         list($builder, $root) = $this->createTreeBuilder('webit_doctrine_json');
 
