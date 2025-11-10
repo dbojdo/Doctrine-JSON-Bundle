@@ -17,12 +17,12 @@ use Webit\DoctrineJmsJson\DBAL\JmsJsonType;
 
 class WebitDoctrineJsonBundle extends Bundle
 {
-    public function boot()
+    public function boot(): void
     {
         $this->registerJmsJsonType($this->container);
     }
 
-    private function registerJmsJsonType(Container $container)
+    private function registerJmsJsonType(Container $container): void
     {
         if (!$container->hasParameter('webit_doctrine_json.jms_json.type_name')) {
             return;
