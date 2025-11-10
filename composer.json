@@ -23,8 +23,7 @@
     "autoload": {
         "psr-4": {
             "Webit\\DoctrineJsonBundle\\": ""
-        },
-        "files": ["aliases.php"]
+        }
     },
     "extra": {
         "branch-alias": {
